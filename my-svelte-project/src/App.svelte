@@ -1,0 +1,42 @@
+<script>
+	import { onMount } from "svelte";
+	export let name;
+	const response = fetch('http://127.0.0.1:8000/data-display');
+	let posts = [];
+	onMount(async function () {
+  		const response = await fetch('http://127.0.0.1:8000/data-display');
+  		const data = await response.json();
+  		console.log(data);
+		posts = data;
+	});
+</script>
+
+<main>
+
+    <div>
+		<h1>{posts.time}</h1>
+		<p>{posts.random_number}</p>
+    </div>
+</main>
+
+<style>
+	main {
+		text-align: center;
+		padding: 1em;
+		max-width: 240px;
+		margin: 0 auto;
+	}
+
+	h1 {
+		color: #ff3e00;
+		text-transform: uppercase;
+		font-size: 4em;
+		font-weight: 100;
+	}
+
+	@media (min-width: 640px) {
+		main {
+			max-width: none;
+		}
+	}
+</style>
